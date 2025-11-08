@@ -85,12 +85,19 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            if (entry.target.classList.contains('timeline-item')) {
+                entry.target.classList.add('visible');
+            }
         }
     });
 }, observerOptions);
 
-// Observe service cards and portfolio items
-document.querySelectorAll('.service-card, .portfolio-item').forEach(el => {
+// Observe service cards, portfolio items, and timeline items
+document.querySelectorAll('.service-card, .portfolio-item, .timeline-item').forEach(el => {
+    if (el.classList.contains('timeline-item')) {
+        // Timeline items will be handled by the visible class
+        return;
+    }
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
