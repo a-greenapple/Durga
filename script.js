@@ -96,6 +96,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.service-card, .portfolio-item, .timeline-item').forEach(el => {
     if (el.classList.contains('timeline-item')) {
         // Timeline items will be handled by the visible class
+        observer.observe(el);
         return;
     }
     el.style.opacity = '0';
